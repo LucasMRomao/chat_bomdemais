@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Electronjs</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+    </head>
+    <body style="background-color: lightblue;">
+        <div class="modal" tabindex="-1" id="modalVazio">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alerta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Insira um usuário e uma senha.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-grid gap-2  mx-auto">
+                    <img src="img/user-128.png" style="width: 150; height: auto; margin: 0 auto;"/>
+                    <input type="text" id="iUsuario" class="form-control" placeholder="Usuário"/>
+                    <input type="password" id="iSenha" class="form-control" placeholder="Senha"/>
+                    <button class="btn btn-outline-success" id="bEntrar">Entrar</button>
+                    <button class="btn btn-outline-danger" id="bFechar">Fechar</button>
+                </div>
+            </div>
+        </div>
+        <script src="js/code.jquery.com_jquery-3.7.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/myjs.js"></script>
+    </body>
+</html>
