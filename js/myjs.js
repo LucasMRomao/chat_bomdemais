@@ -7,4 +7,10 @@ $(() => {
             $("#modalVazio").modal('show');
         }
     });
+
+    $("#bFechar").click(() => {
+        if(confirm("Deseja realmente sair do sistema?")){
+            window.close();
+        }
+    });
 });
