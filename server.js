@@ -11,6 +11,7 @@ io.on("connection", (socket) => {
 
     socket.on("teste", (a, b) => {
         console.log(`Test emmitted: ${a} + ${b}`);
+        socket.emit("retorno_teste", "Funcionou!", "Que orgulho!", "Bom demais")
     });
 })
 
