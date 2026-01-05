@@ -13,4 +13,14 @@ $(() => {
             window.close();
         }
     });
+
+    var socket = io("http://localhost:3000");
+
+    socket.emit("teste", 'Bom', 'Demais');
+
+    socket.on("retorno_teste", (val1, val2, val3) => {
+        console.log(val1);
+        console.log(val2);
+        console.log(val3);
+    })
 });
