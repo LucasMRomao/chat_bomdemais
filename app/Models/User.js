@@ -7,6 +7,9 @@ const Model = use('Model')
 const Hash = use('Hash')
 
 class User extends Model {
+
+  static table = 'usuarios'
+
   static boot () {
     super.boot()
 

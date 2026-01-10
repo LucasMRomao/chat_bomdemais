@@ -4,6 +4,7 @@
 const Schema = use('Schema')
 
 class UserSchema extends Schema {
+
   up () {
     this.create('usuarios', (table) => {
       table.increments()
