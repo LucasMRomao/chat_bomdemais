@@ -42,6 +42,14 @@ class UsuarioController {
         return await user.delete()
     }
 
+    async getUsuarioByCredentials({ request }){
+        const data = request.only([
+            'usuario',
+            'senha'
+        ])
+        return Usuario.getUsuarioByCredentials(data)
+    }
+
 }
 
 module.exports = UsuarioController

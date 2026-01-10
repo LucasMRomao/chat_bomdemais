@@ -1,5 +1,7 @@
 'use strict'
 
+const Database = use('Database')
+
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
@@ -36,6 +38,10 @@ class User extends Model {
    */
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  static async getUsuarioByCredentials(data){
+    return Database.raw(`(SELECT * FROM usuarios WHERE usuario = '${data.usuario}' AND SENHA = '${data.senha}')`)
   }
 }
 

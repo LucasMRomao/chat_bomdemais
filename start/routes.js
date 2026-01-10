@@ -29,3 +29,5 @@ Route.put('/usuarios/:id', 'UsuarioController.update')
 Route.delete('/usuarios/:id', 'UsuarioController.destroy')*/
 
 Route.resource('mensagens', 'MensagemController').apiOnly()
+
+Route.get('/getUsuarioByCredentials', 'UsuarioController.getUsuarioByCredentials')
