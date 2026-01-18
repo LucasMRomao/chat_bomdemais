@@ -1,10 +1,10 @@
 <html>
     <head>
         <title>Electronjs</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/styles.css" />
     </head>
-    <body style="background-color: lightblue;">
+    <body background="../img/fundo.png" style="background-size: cover;"> <!--style="background-color: lightblue;"-->
         <div class="modal" tabindex="-1" id="modalVazio">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -64,19 +64,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 d-grid gap-2">
-                    <img src="img/icone-usuario.png" style="width: 150; height: auto; margin: 0 auto;"/>
+                    <img src="../img/logo.png" style="width: 150; height: auto; margin: 0 auto;"/>
                     <input type="text" id="iUsuario" class="form-control" placeholder="Usuário"/>
                     <input type="password" id="iSenha" class="form-control" placeholder="Senha"/>
                     <button class="btn btn-outline-success" id="bEntrar">Entrar</button>
                     <button class="btn btn-outline-danger" id="bFechar">Fechar</button>
-                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modal-configuracoes"><img src="img/icone-engrenagens.gif" /></button>
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modal-configuracoes"><img src="../img/icone-engrenagens.gif" /></button>
                 </div>
             </div>
         </div>
-        <script src="js/code.jquery.com_jquery-3.7.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/code.jquery.com_jquery-3.7.1.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
         <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
-        <script src="js/config.js"></script>
-        <script src="js/myjs.js"></script>
+        <script src="../js/config.js"></script>
+        <script src="../renderer.js"></script>
+        <script src="../js/myjs.js"></script>
     </body>
 </html>

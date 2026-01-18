@@ -24,6 +24,23 @@ $(() => {
 
         if(!usuario || !senha){
             $("#modalVazio").modal('show');
+        }else{
+            $.ajax({
+                url: CONFIG.URL_API + "/getUsuarioByCredentials",
+                method: "GET",
+                data: {
+                    usuario: usuario,
+                    senha: senha
+                },
+                success: (result) => {
+                    if(result[0][0]){
+                        abrirTelaPrincipal(usuario);
+                    }else{
+                        $("#modal-configuracoes").modal('hide')
+                        $("#modal-credenciais-incorretas").modal('show');
+                    }
+                }
+            });
         }
     });
 
