@@ -24,7 +24,19 @@ const abrirTelaPrincipal = () => {
     resizable: false
   })
 
-  principal.loadFile('pages/index.html')
+  principal.loadFile('./pages/index.html')
+}
+
+const abrirTelaConfiguracoes = () => {
+  const configuracoes = new BrowserWindow({
+    width: 600,
+    height: 600,
+    icon: './img/icone.png',
+    autoHideMenuBar: true,
+    resizable: false
+  })
+
+  configuracoes.loadFile('./pages/configuracoes.html')
 }
 
 app.whenReady().then(() => {
@@ -40,10 +52,15 @@ app.whenReady().then(() => {
 
   ipcMain.handle("ping", (event, nome) => nome)
 
-  ipcMain.on("abrir-tela-principal", (envent, usuarioLogado) => {
+  ipcMain.on("abrir-tela-principal", (event, usuarioLogado) => {
     console.log(usuarioLogado);
     abrirTelaPrincipal();
-  })
+  });
+
+  ipcMain.on("abrir-tela-configuracoes", (event, usuarioLogado) => {
+    console.log(usuarioLogado);
+    abrirTelaConfiguracoes();
+  });
 })
 
 app.on('window-all-closed', () => {

@@ -1,4 +1,4 @@
-function abrirTelaConfiguracoes(usuario, senha){
+function autenticarConfiguracoes(usuario, senha){
     $.ajax({
         url: CONFIG.URL_API + "/getUsuarioByCredentials",
         method: "GET",
@@ -8,7 +8,7 @@ function abrirTelaConfiguracoes(usuario, senha){
         },
         success: (result) => {
             if(result[0][0]){
-                alert("Usuário: " + result[0][0].usuario + " / Senha: " + result[0][0].senha)
+                abrirTelaConfiguracoes(usuario);
             }else{
                 $("#modal-configuracoes").modal('hide')
                 $("#modal-credenciais-incorretas").modal('show');
@@ -18,6 +18,15 @@ function abrirTelaConfiguracoes(usuario, senha){
 }
 
 $(() => {
+
+    $("#iUsuario").keyup((event) => {
+        if(event.keyCode == 13) $("#bEntrar").click() //13 = Enter
+    });
+
+    $("#iSenha").keyup((event) => {
+        if(event.keyCode == 13) $("#bEntrar").click() //13 = Enter
+    })
+
     $("#bEntrar").click(() => {
         let usuario = $("#iUsuario").val();
         let senha = $("#iSenha").val();
@@ -57,7 +66,7 @@ $(() => {
         if(!usuario || !senha){
             alert("Ambos os campos devem ser preenchidos!");
         }else{
-            abrirTelaConfiguracoes(usuario, senha);
+            autenticarConfiguracoes(usuario, senha);
         }
     }); 
 
@@ -65,14 +74,4 @@ $(() => {
         $("#modal-credenciais-incorretas").modal('hide');
         $("#modal-configuracoes").modal('show');
     });
-
-    var socket = io(CONFIG.URL_SERVIDOR_SOCKET);
-
-    socket.emit("teste", 'Bom', 'Demais');
-
-    socket.on("retorno_teste", (val1, val2, val3) => {
-        console.log(val1);
-        console.log(val2);
-        console.log(val3);
-    })
 });
