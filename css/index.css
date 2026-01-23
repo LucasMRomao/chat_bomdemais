@@ -1,9 +1,11 @@
 .contatos{
-    
+    height: 99vh;
+    overflow: auto;    
 }
 
 .mensagens{
-
+    height: 99vh;
+    overflow: auto;
 }
 
 .mensagem{
