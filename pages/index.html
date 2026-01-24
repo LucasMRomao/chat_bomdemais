@@ -30,8 +30,8 @@
                     <a href="#" class="list-group-item list-group-item-action">Usuário 16</a>
                 </ul>
             </div>
-            <div class="col-9 mensagens">
-                <div class="row">
+            <div class="col-9">
+                <div class="row mensagens">
                     <div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
                     <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>
                     <div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
@@ -47,12 +47,25 @@
                     <div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
                     <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>
                 </div>
+                <div class="row div-enviar-mensagem">
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" id="iMensagemEnviar" rows="2"></textarea>
+                        <button type="button" class="btn btn-outline-primary" id="bEnviarMensagem"><img src="../img/icone-enviar-2.gif"/></button>
+                    </div>
+                    <!--<div class="col-9">
+                        <textarea class="form-control" id="iMensagemEnviar" rows="2"></textarea>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-outline-primary" id="bEnviarMensagem"><img src="../img/icone-enviar.gif"/></button>
+                    </div>-->
+                </div>
             </div>
         </div>
     </div>
     <script src="../js/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+    <script src="../js/socket.io.min.js"></script>
     <script src="../js/config.js"></script>
+    <script src="../renderer.js"></script>
     <script src="../js/index.js"></script>
 </body>
 </html>

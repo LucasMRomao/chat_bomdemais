@@ -43,12 +43,15 @@ const carregarUsuarios = () => {
                 console.log(result[i]);
 
                 let id = result[i].id;
+                let nome = result[i].nome;
                 let usuario = result[i].usuario;
                 let senha = result[i].senha;
 
                 let $linhaUsuario = "<tr><td>";
                 $linhaUsuario += id;
                 $linhaUsuario += "</td><td>";
+                $linhaUsuario += nome;
+                $linhaUsuario += "</td><td>"
                 $linhaUsuario += usuario;
                 $linhaUsuario += "</td><td>";
                 $linhaUsuario += esconderSenha(senha);
@@ -66,6 +69,18 @@ const carregarUsuarios = () => {
 
 $(() => {
     carregarUsuarios();
+
+    $("#iAdicionarNome").keyup((event) => {
+        if(event.keyCode == 13){ //13 = Enter
+            $("#bAdicionarUsuario").click();
+        }
+    });
+
+    $("#iAdicionarUsuario").keyup((event) => {
+        if(event.keyCode == 13){ //13 = Enter
+            $("#bAdicionarUsuario").click();
+        }
+    });
 
     $("#bAdicionarUsuario").click(() => {
         let nome = $("#iAdicionarNome").val();

@@ -1,3 +1,5 @@
+var auxUsuario = "", auxNome = "";
+
 function autenticarConfiguracoes(usuario, senha){
     $.ajax({
         url: CONFIG.URL_API + "/getUsuarioByCredentials",
@@ -10,14 +12,26 @@ function autenticarConfiguracoes(usuario, senha){
             if(result[0][0]){
                 abrirTelaConfiguracoes(usuario);
             }else{
-                $("#modal-configuracoes").modal('hide')
-                $("#modal-credenciais-incorretas").modal('show');
+                $("#modal-configuracoes").modal('hide');
+                $("#modal-mensagem").text("Usuário e/ou senha incorreto(s).");
+                $("#modal-exibir-mensagem").modal('show');
             }
         }
     });
 }
 
 $(() => {
+
+    var socket = io(CONFIG.URL_SERVIDOR_SOCKET);
+
+    socket.on("retorno-verifica-online", (isOnline) => {
+        if(isOnline){
+            $("#modal-mensagem").text("O usuário informado já está logado!");
+            $("#modal-exibir-mensagem").modal("show");  
+        }else{
+            abrirTelaPrincipal(auxUsuario, auxNome);
+        }
+    });
 
     $("#iUsuario").keyup((event) => {
         if(event.keyCode == 13) $("#bEntrar").click() //13 = Enter
@@ -32,7 +46,8 @@ $(() => {
         let senha = $("#iSenha").val();
 
         if(!usuario || !senha){
-            $("#modalVazio").modal('show');
+            $("#modal-mensagem").text("Insira um usuário e uma senha.");
+            $("#modal-exibir-mensagem").modal('show');
         }else{
             $.ajax({
                 url: CONFIG.URL_API + "/getUsuarioByCredentials",
@@ -43,10 +58,13 @@ $(() => {
                 },
                 success: (result) => {
                     if(result[0][0]){
-                        abrirTelaPrincipal(usuario);
+                        socket.emit("verifica-usuario-online", usuario);
+                        auxUsuario = result[0][0].usuario;
+                        auxNome = result[0][0].nome;
                     }else{
-                        $("#modal-configuracoes").modal('hide')
-                        $("#modal-credenciais-incorretas").modal('show');
+                        $("#modal-configuracoes").modal('hide');
+                        $("#modal-mensagem").text("Usuário e/ou senha incorreto(s).");
+                        $("#modal-exibir-mensagem").modal('show');
                     }
                 }
             });
@@ -64,7 +82,9 @@ $(() => {
         let senha = $("#iSenhaConfiguracoes").val();
 
         if(!usuario || !senha){
-            alert("Ambos os campos devem ser preenchidos!");
+            $("#modal-configuracoes").modal('hide');
+            $("#modal-mensagem").text("Ambos os campos devem ser preenchidos!");
+            $("#modal-exibir-mensagem").modal('show');
         }else{
             autenticarConfiguracoes(usuario, senha);
         }

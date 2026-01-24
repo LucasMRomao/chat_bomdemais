@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body background="../img/fundo.png" style="background-size: cover;"> <!--style="background-color: lightblue;"-->
-        <div class="modal" tabindex="-1" id="modalVazio">
+        <div class="modal" tabindex="-1" id="modal-exibir-mensagem">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -13,26 +13,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Insira um usuário e uma senha.</p>
+                    <p id="modal-mensagem"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
-                </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal" tabindex="-1" id="modal-credenciais-incorretas">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Alerta</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Usuário e/ou senha incorreto(s).</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="btn-credenciais-incorretas" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
                 </div>
                 </div>
             </div>
@@ -75,6 +59,7 @@
         </div>
         <script src="../js/jquery-3.7.1.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/socket.io.min.js"></script>
         <script src="../js/config.js"></script>
         <script src="../renderer.js"></script>
         <script src="../js/login.js"></script>

@@ -1,6 +1,29 @@
+var socket = null;
+
+const atualizarUsuariosOnline = (lista) => {
+    $("#ulContatos").html("");
+
+    for(var i in lista){
+        let $user = "<a href='#' class='list-group-item list-group-item-action'>";
+        $user += lista[i].nome;
+        $user += "</a>";
+
+        $("#ulContatos").append($user);
+    }
+
+    $("#ulContatos>.list-group-item-action").click((event) => {
+        $("#ulContatos>.active").removeClass("active");
+        $(event.currentTarget).addClass("active");
+    });
+}
+
+const sinalizarUsuarioOnline = async () => {
+    let dados = await pegarDadosUsuarioOnline();
+    socket.emit("user_online", dados.nome, dados.usuario);
+}
+
 $(() => {
-    console.log("socket");
-    var socket = io(CONFIG.URL_SERVIDOR_SOCKET);
+    socket = io(CONFIG.URL_SERVIDOR_SOCKET);
 
     socket.emit("teste", 'Bom', 'Demais');
 
@@ -10,8 +33,10 @@ $(() => {
         console.log(val3);
     });
 
-    $("#ulContatos>.list-group-item-action").click((event) => {
-        $("#ulContatos>.active").removeClass("active");
-        $(event.currentTarget).addClass("active");
+    sinalizarUsuarioOnline(socket);
+    //socket.emit("user-offline", "lucas");
+    
+    socket.on("atualiza-usuarios-online", (usuariosOnline) => {
+        atualizarUsuariosOnline(usuariosOnline);
     });
 });
