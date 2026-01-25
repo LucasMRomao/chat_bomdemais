@@ -19,6 +19,8 @@ const atualizarUsuariosOnline = (lista) => {
         $("#iMensagemEnviar").prop("disabled", false);
         $("#bEnviarMensagem").prop("disabled", false);
         
+        $(event.currentTarget).find(".span-alerta-mensagem").remove(); //Remove o alerta de mensagens ao selecionar usuário
+
         $(".mensagens").html("");
 
         let idUsuarioSelecionado = $(event.currentTarget).attr("userid");
@@ -39,6 +41,12 @@ const atualizarUsuariosOnline = (lista) => {
                         let $msg = `<div class="col-12 mensagem ${result[0][i].id_usuario_envia == idUsuarioLogado ? "mensagemEnvidada d-flex" : "mensagemRecebida"}"><span class="badge text-bg-${result[0][i].id_usuario_envia == idUsuarioLogado ? "success ms-auto" : "warning"} span-msg">${result[0][i].mensagem}</span></div>`;
                         $(".mensagens").append($msg);
                     }
+
+                    // Animate the scroll of the 'html' and 'body' elements
+                    $('.mensagens').animate({
+                        // Calculate the target position: the element's distance from the top of the document
+                        scrollTop: $(".mensagem").last().offset().top
+                    }, 1); // 1ms is the duration of the animation (1 second)
                 }
             }
         });
@@ -94,7 +102,14 @@ $(() => {
             }, 1000); // 1000ms is the duration of the animation (1 second)
 
         }else{
-            $(`#ulContatos>[userid=${idUsuarioEnvia}]`).append(`<span class="badge text-bg-warning span-alerta-mensagem">!</span>`);
+            let spanAlertaMensagem = $(`#ulContatos>[userid=${idUsuarioEnvia}]>.span-alerta-mensagem`);
+            if(spanAlertaMensagem.length == 0 ){
+                $(`#ulContatos>[userid=${idUsuarioEnvia}]`).append(`<span class="badge text-bg-warning span-alerta-mensagem">1</span>`);
+            }else{
+                let totalMensagens = Number(spanAlertaMensagem.text());
+                totalMensagens++;
+                spanAlertaMensagem.text(totalMensagens);
+            }
         }
     });
 
