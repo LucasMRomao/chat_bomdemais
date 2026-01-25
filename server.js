@@ -22,18 +22,21 @@ io.on("connection", (socket) => {
         socket.emit("retorno_teste", "Funcionou!", "Que orgulho!", "Bom demais")
     });
 
-    socket.on("user_online", (nome, username) => {
+    socket.on("user-online", (id, nome, username) => {
         let usuario = {
+            id: id,
             nome: nome,
             usuario: username,
             socketid: socket.id
         };
 
+        console.log(`ID: ${id} - NOME: ${nome} - USUARIO: ${username}`);
+
         usuariosOnline.push(usuario);
         io.emit("atualiza-usuarios-online", usuariosOnline);
     });
 
-    socket.on("user_offline", (username) => {
+    socket.on("user-offline", (username) => {
         let index = usuariosOnline.findIndex((user) => user.usuario == username);
         usuariosOnline.splice(index, 1); //O primeiro parâmetro é o índice a iniciar a remoção. O segundo é a quantidade de itens a remover
         io.emit("atualiza-usuarios-online", usuariosOnline);
@@ -43,6 +46,10 @@ io.on("connection", (socket) => {
         console.log(`Verificando se ${username} está online`);
         let index = usuariosOnline.findIndex((user) => user.usuario == username);
         socket.emit("retorno-verifica-online", index > -1);
+    });
+
+    socket.on("enviar-mensagem", (idUsuarioEnvia, idUsuarioRecebe, mensagem) => {
+        io.emit("receber-mensagem", idUsuarioEnvia, idUsuarioRecebe, mensagem);
     });
 });
 
