@@ -5,7 +5,7 @@ var idUsuarioLogado = "";
 const atualizarUsuariosOnline = (lista) => {
     $("#ulContatos").html("");
 
-    console.log(lista);
+    //console.log(lista);
 
     for(var i in lista){
         console.log(lista[i].id);
@@ -39,13 +39,13 @@ const sinalizarUsuarioOnline = async () => {
 $(() => {
     socket = io(CONFIG.URL_SERVIDOR_SOCKET);
 
-    socket.emit("teste", 'Bom', 'Demais');
+    /*socket.emit("teste", 'Bom', 'Demais');
 
     socket.on("retorno_teste", (val1, val2, val3) => {
         console.log(val1);
         console.log(val2);
         console.log(val3);
-    });
+    });*/
 
     sinalizarUsuarioOnline();
     //socket.emit("user-offline", "lucas");
@@ -55,12 +55,20 @@ $(() => {
     });
 
     socket.on("receber-mensagem", (idUsuarioEnvia, mensagem) => {
-        console.log(`ID Usuário: ${idUsuarioEnvia} - MENSAGEM: ${mensagem}`);
+        //console.log(`ID Usuário: ${idUsuarioEnvia} - MENSAGEM: ${mensagem}`);
 
         let userAtivo = $("#ulContatos>.active");
         
-        if($(userAtivo).attr("userid") == idUsuarioEnvia){
-            //O usuário ativo é quem enviou a mensagem
+        if($(userAtivo).attr("userid") == idUsuarioEnvia){ //O usuário ativo é quem enviou a mensagem
+            let $mensagem = `<div class="col-12 mensagem mensagemRecebida d-flex h-auto"><span class="badge text-bg-warning span-msg">${mensagem}</span></div>`;
+            $(".mensagens").append($mensagem);
+
+            // Animate the scroll of the 'html' and 'body' elements
+            $('.mensagens').animate({
+                // Calculate the target position: the element's distance from the top of the document
+                scrollTop: $(".mensagem").last().offset().top
+            }, 1000); // 1000ms is the duration of the animation (1 second)
+
         }else{
             $(`#ulContatos>[userid=${idUsuarioEnvia}]`).append(`<span class="badge text-bg-warning span-alerta-mensagem">!</span>`);
         }
@@ -83,8 +91,17 @@ $(() => {
                 mensagem: mensagem
             },
             success: (result) => {
-                console.log(result);
+                //console.log(result);
                 $("#iMensagemEnviar").val("");
+                let $mensagem = `<div class="col-12 mensagem mensagemEnviada d-flex h-auto"><span class="badge text-bg-success ms-auto span-msg">${mensagem}</span></div>`;
+                $(".mensagens").append($mensagem);
+                
+                // Animate the scroll of the 'html' and 'body' elements
+                $('.mensagens').animate({
+                    // Calculate the target position: the element's distance from the top of the document
+                    scrollTop: $(".mensagem").last().offset().top
+                }, 1000); // 1000ms is the duration of the animation (1 second)
+
                 socket.emit("enviar-mensagem", idUsuarioLogado, usuarioID, mensagem);
             }
         });
