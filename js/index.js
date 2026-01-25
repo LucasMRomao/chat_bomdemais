@@ -19,6 +19,30 @@ const atualizarUsuariosOnline = (lista) => {
         $("#iMensagemEnviar").prop("disabled", false);
         $("#bEnviarMensagem").prop("disabled", false);
         
+        $(".mensagens").html("");
+
+        let idUsuarioSelecionado = $(event.currentTarget).attr("userid");
+
+        //console.log(`PEGANDO MENSAGENS ENTRE ${idUsuarioLogado} E ${idUsuarioSelecionado}`);
+
+        $.ajax({
+            url: CONFIG.URL_API + "/getMensagensEntreUsuarios",
+            method: "GET",
+            data: {
+                usuario1: idUsuarioLogado,
+                usuario2: idUsuarioSelecionado
+            },
+            success: (result) => {
+                console.log(result[0]);
+                if(result[0]){ //Se tiver ao menos 1 mensagem
+                    for(let i in result[0]){
+                        let $msg = `<div class="col-12 mensagem ${result[0][i].id_usuario_envia == idUsuarioLogado ? "mensagemEnvidada d-flex" : "mensagemRecebida"}"><span class="badge text-bg-${result[0][i].id_usuario_envia == idUsuarioLogado ? "success ms-auto" : "warning"} span-msg">${result[0][i].mensagem}</span></div>`;
+                        $(".mensagens").append($msg);
+                    }
+                }
+            }
+        });
+
         /*let listaAlertas = $(".span-alerta-mensagem");
         console.log(listaAlertas);
         console.log(listaAlertas.parent().attr("userid"));
