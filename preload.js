@@ -3,8 +3,7 @@ window.ipcRenderer = require("electron").ipcRenderer
 
 contextBridge.exposeInMainWorld("api", {
     ping: (nome) => ipcRenderer.invoke("ping", nome),
-    abrirTelaPrincipal: (usuarioLogado, nomeLogado) => ipcRenderer.send("abrir-tela-principal", usuarioLogado, nomeLogado),
+    abrirTelaPrincipal: (usuarioLogado, idLogado, nomeLogado) => ipcRenderer.send("abrir-tela-principal", usuarioLogado, idLogado, nomeLogado),
     abrirTelaConfiguracoes: (usuarioLogado) => ipcRenderer.send("abrir-tela-configuracoes", usuarioLogado),
-    pegarDadosUsuarioOnline: () => ipcRenderer.invoke("pegar-dados-usuario-online"),
-    teste: () => 'TESTEOK'
+    pegarDadosUsuarioOnline: () => ipcRenderer.invoke("pegar-dados-usuario-online")
 });

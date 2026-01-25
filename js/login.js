@@ -1,4 +1,4 @@
-var auxUsuario = "", auxNome = "";
+var auxUsuario = "", auxNome = "", auxID = "";
 
 function autenticarConfiguracoes(usuario, senha){
     $.ajax({
@@ -29,7 +29,7 @@ $(() => {
             $("#modal-mensagem").text("O usuário informado já está logado!");
             $("#modal-exibir-mensagem").modal("show");  
         }else{
-            abrirTelaPrincipal(auxUsuario, auxNome);
+            abrirTelaPrincipal(auxUsuario, auxID, auxNome);
         }
     });
 
@@ -58,9 +58,11 @@ $(() => {
                 },
                 success: (result) => {
                     if(result[0][0]){
+                        console.log(result[0][0]);
                         socket.emit("verifica-usuario-online", usuario);
                         auxUsuario = result[0][0].usuario;
                         auxNome = result[0][0].nome;
+                        auxID = result[0][0].id;
                     }else{
                         $("#modal-configuracoes").modal('hide');
                         $("#modal-mensagem").text("Usuário e/ou senha incorreto(s).");

@@ -6,8 +6,8 @@
 
 teste()*/
 
-async function abrirTelaPrincipal(usuario, nome) {
-    const response = await window.api.abrirTelaPrincipal(usuario, nome);
+async function abrirTelaPrincipal(usuario, id, nome) {
+    const response = await window.api.abrirTelaPrincipal(usuario, id, nome);
 }
 
 async function abrirTelaConfiguracoes(usuario){

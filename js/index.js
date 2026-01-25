@@ -1,25 +1,31 @@
 var socket = null;
+var usuarioLogado = "";
+var idUsuarioLogado = "";
 
 const atualizarUsuariosOnline = (lista) => {
     $("#ulContatos").html("");
 
-    for(var i in lista){
-        let $user = "<a href='#' class='list-group-item list-group-item-action'>";
-        $user += lista[i].nome;
-        $user += "</a>";
+    console.log(lista);
 
+    for(var i in lista){
+        console.log(lista[i].id);
+        let $user = `<a href='#' class='list-group-item list-group-item-action' userid='${lista[i].id}' username='${lista[i].usuario}'>${lista[i].nome}</a>`;
         $("#ulContatos").append($user);
     }
 
     $("#ulContatos>.list-group-item-action").click((event) => {
         $("#ulContatos>.active").removeClass("active");
         $(event.currentTarget).addClass("active");
+        $("#iMensagemEnviar").prop("disabled", false);
+        $("#bEnviarMensagem").prop("disabled", false);
     });
 }
 
 const sinalizarUsuarioOnline = async () => {
     let dados = await pegarDadosUsuarioOnline();
-    socket.emit("user_online", dados.nome, dados.usuario);
+    socket.emit("user-online", dados.id, dados.nome, dados.usuario);
+    usuarioLogado = dados.usuario;
+    idUsuarioLogado = dados.id;
 }
 
 $(() => {
@@ -33,10 +39,33 @@ $(() => {
         console.log(val3);
     });
 
-    sinalizarUsuarioOnline(socket);
+    sinalizarUsuarioOnline();
     //socket.emit("user-offline", "lucas");
     
     socket.on("atualiza-usuarios-online", (usuariosOnline) => {
         atualizarUsuariosOnline(usuariosOnline);
+    });
+
+    $("#bEnviarMensagem").click(() => {
+        let usuarioID = $("#ulContatos>.active").attr("userid");
+        let mensagem = $("#iMensagemEnviar").val();
+
+        console.log(usuarioID);
+        console.log(idUsuarioLogado);
+        console.log(mensagem);
+
+        $.ajax({
+            url: CONFIG.URL_API + "/mensagens",
+            method: "POST",
+            data: {
+                id_usuario_envia: idUsuarioLogado,
+                id_usuario_recebe: usuarioID,
+                mensagem: mensagem
+            },
+            success: (result) => {
+                console.log(result);
+                $("#iMensagemEnviar").val("");
+            }
+        });
     });
 });

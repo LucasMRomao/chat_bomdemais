@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require("node:path")
 
 let userLogado = ''
+let idUserLogado = ''
 let nomeUserLogado = ''
 
 //Janela Inicial
@@ -39,7 +40,10 @@ const abrirTelaConfiguracoes = () => {
     height: 800,
     icon: './img/icone.png',
     autoHideMenuBar: true,
-    resizable: false
+    resizable: false,
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js")
+    }
   })
 
   configuracoes.loadFile('./pages/configuracoes.html')
@@ -56,10 +60,11 @@ app.whenReady().then(() => {
     }
   })
 
-  ipcMain.handle("ping", (event, nome) => nome)
+  //ipcMain.handle("ping", (event, nome) => nome)
 
-  ipcMain.on("abrir-tela-principal", (event, usuarioLogado, nomeUsuarioLogado) => {
+  ipcMain.on("abrir-tela-principal", (event, usuarioLogado, idUsuarioLogado, nomeUsuarioLogado) => {
     userLogado = usuarioLogado;
+    idUserLogado = idUsuarioLogado;
     nomeUserLogado = nomeUsuarioLogado;
     abrirTelaPrincipal();
   });
@@ -71,10 +76,11 @@ app.whenReady().then(() => {
 
   ipcMain.handle("pegar-dados-usuario-online", (event) => {
     let user = {
+      id: idUserLogado,
       usuario: userLogado,
       nome: nomeUserLogado
     }
-
+    
     return user;
   })
 })
