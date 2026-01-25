@@ -45,7 +45,7 @@ const atualizarUsuariosOnline = (lista) => {
                     // Animate the scroll of the 'html' and 'body' elements
                     $('.mensagens').animate({
                         // Calculate the target position: the element's distance from the top of the document
-                        scrollTop: $(".mensagem").last().offset().top
+                        scrollTop: $('.mensagens')[0].scrollHeight
                     }, 1); // 1ms is the duration of the animation (1 second)
                 }
             }
@@ -98,7 +98,7 @@ $(() => {
             // Animate the scroll of the 'html' and 'body' elements
             $('.mensagens').animate({
                 // Calculate the target position: the element's distance from the top of the document
-                scrollTop: $(".mensagem").last().offset().top
+                scrollTop: $('.mensagens')[0].scrollHeight
             }, 1000); // 1000ms is the duration of the animation (1 second)
 
         }else{
@@ -138,7 +138,7 @@ $(() => {
                 // Animate the scroll of the 'html' and 'body' elements
                 $('.mensagens').animate({
                     // Calculate the target position: the element's distance from the top of the document
-                    scrollTop: $(".mensagem").last().offset().top
+                    scrollTop: $('.mensagens')[0].scrollHeight
                 }, 1000); // 1000ms is the duration of the animation (1 second)
 
                 socket.emit("enviar-mensagem", idUsuarioLogado, usuarioID, mensagem);
