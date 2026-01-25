@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
             socketid: socket.id
         };
 
-        console.log(`ID: ${id} - NOME: ${nome} - USUARIO: ${username}`);
+        console.log(`ID: ${id} - NOME: ${nome} - USUARIO: ${username} - SOCKETID: ${socket.id}`);
 
         usuariosOnline.push(usuario);
         io.emit("atualiza-usuarios-online", usuariosOnline);
@@ -49,7 +49,9 @@ io.on("connection", (socket) => {
     });
 
     socket.on("enviar-mensagem", (idUsuarioEnvia, idUsuarioRecebe, mensagem) => {
-        io.emit("receber-mensagem", idUsuarioEnvia, idUsuarioRecebe, mensagem);
+        let index = usuariosOnline.findIndex((user) => user.id == idUsuarioRecebe);
+        console.log(`INDEX ENVIAR ${index}`);
+        io.to(usuariosOnline[index].socketid).emit("receber-mensagem", idUsuarioEnvia, mensagem);
     });
 });
 
