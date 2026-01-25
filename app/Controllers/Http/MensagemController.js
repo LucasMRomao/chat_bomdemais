@@ -42,6 +42,14 @@ class MensagemController {
         return await mensagem.delete()
     }
 
+    async getMensagensEntreUsuarios({ request }){
+        const data = request.only([
+            'usuario1',
+            'usuario2'
+        ])
+        return Mensagem.getMensagensEntreUsuarios(data)
+    }
+
 }
 
 module.exports = MensagemController
