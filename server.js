@@ -43,15 +43,20 @@ io.on("connection", (socket) => {
     });
 
     socket.on("verifica-usuario-online", (username) => {
-        console.log(`Verificando se ${username} está online`);
+        //console.log(`Verificando se ${username} está online`);
         let index = usuariosOnline.findIndex((user) => user.usuario == username);
         socket.emit("retorno-verifica-online", index > -1);
     });
 
     socket.on("enviar-mensagem", (idUsuarioEnvia, idUsuarioRecebe, mensagem) => {
         let index = usuariosOnline.findIndex((user) => user.id == idUsuarioRecebe);
+        console.log(`ID USUARIO ENVIA: ${idUsuarioEnvia} - ID USUARIO RECEBE: ${idUsuarioRecebe} - MENSAGEM: ${mensagem}`)
         console.log(`INDEX ENVIAR ${index}`);
         io.to(usuariosOnline[index].socketid).emit("receber-mensagem", idUsuarioEnvia, mensagem);
+    });
+
+    socket.on("get-users-online", () => {
+       socket.emit("atualiza-usuarios-online", usuariosOnline);
     });
 });
 
