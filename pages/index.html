@@ -10,6 +10,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body background="../img/fundo.png" style="background-size: cover;">
+    <div class="modal fade" tabindex="-1" id="modal-logout">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sair</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Deseja realmente sair do sistema?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="bConfirmaLogout">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-3 contatos">
@@ -18,7 +35,6 @@
                         <div class="d-flex">
                             <button type="button" id="toggle-btn">
                                 <i class="fa-solid fa-grip"></i>
-                                <!--<img src="../img/icones/icone-grid.png" style="width: 20px; height: auto;"/>-->
                             </button>
                             <div class="sidebar-logo">
                                 <a href="#">Contatos</a>
@@ -28,37 +44,24 @@
                             <li class="sidebar-item user-selected">
                                 <a href="#" class="sidebar-link">
                                     <i class="fa-solid fa-comment user-online"></i>
-                                    <!--<img src="../img/icones/icone-usuario.png" style="width: 20px; height: auto;"/>-->
                                     <span class="user-name">Profile</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
                                 <a href="#" class="sidebar-link">
                                     <i class="fa-solid fa-comment-slash user-offline"></i>
-                                    <!--<img src="../img/icones/icone-agenda.png" style="width: 20px; height: auto;"/>-->
                                     <span class="user-name">Task</span>
                                 </a>
                             </li>
                         </ul>
                         <div class="sidebar-footer">
-                            <a href="#" class="sidebar-link logout">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                <!--<img src="../img/icones/icone-logout.gif" style="width: 20px; height: auto;"/>-->
-                                <span>Logout</span>
+                            <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#modal-logout">
+                                <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
+                                <span class="user-name">Logout</span>
                             </a>
                         </div>
                     </aside>
-                    <!--<div class="main p-3">
-                        <div class="text-center">
-                            <h1>
-                                Sidebar Bootstrap 5
-                            </h1>
-                        </div>
-                    </div>-->
                 </div>
-                <!--<ul class="list-group" id="ulContatos">
-                    
-                </ul>-->
             </div>
             <div class="col-9">
                 <div class="main">
@@ -84,6 +87,7 @@
     <script src="https://kit.fontawesome.com/18c4d1a139.js" crossorigin="anonymous"></script>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script src="../js/socket.io.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script src="../js/config.js"></script>
     <script src="../renderer.js"></script>
     <script src="../js/sidebar-toggle.js"></script>

@@ -2,65 +2,11 @@ var socket = null;
 var usuarioLogado = "";
 var idUsuarioLogado = "";
 
-/*const atualizarUsuariosOnline = (lista) => {
-    $("#ulContatos").html("");
-
-    //console.log(lista);
-
-    for(var i in lista){
-        console.log(lista[i].id);
-        let $user = `<a href='#' class='list-group-item list-group-item-action' userid='${lista[i].id}' username='${lista[i].usuario}'>${lista[i].nome}</a>`; //<span class="badge text-bg-warning">!</span>
-        $("#ulContatos").append($user);
-    }
-
-    $("#ulContatos>.list-group-item-action").click((event) => {
-        $("#ulContatos>.active").removeClass("active");
-        $(event.currentTarget).addClass("active");
-        $("#iMensagemEnviar").prop("disabled", false);
-        $("#bEnviarMensagem").prop("disabled", false);
-        
-        $(event.currentTarget).find(".span-alerta-mensagem").remove(); //Remove o alerta de mensagens ao selecionar usuário
-
-        $(".mensagens").html("");
-
-        let idUsuarioSelecionado = $(event.currentTarget).attr("userid");
-
-        //console.log(`PEGANDO MENSAGENS ENTRE ${idUsuarioLogado} E ${idUsuarioSelecionado}`);
-
-        $.ajax({
-            url: CONFIG.URL_API + "/getMensagensEntreUsuarios",
-            method: "GET",
-            data: {
-                usuario1: idUsuarioLogado,
-                usuario2: idUsuarioSelecionado
-            },
-            success: (result) => {
-                console.log(result[0]);
-                if(result[0]){ //Se tiver ao menos 1 mensagem
-                    for(let i in result[0]){
-                        let $msg = `<div class="col-12 mensagem ${result[0][i].id_usuario_envia == idUsuarioLogado ? "mensagemEnvidada d-flex" : "mensagemRecebida"}"><span class="badge text-bg-${result[0][i].id_usuario_envia == idUsuarioLogado ? "success ms-auto" : "warning"} span-msg">${result[0][i].mensagem}</span></div>`;
-                        $(".mensagens").append($msg);
-                    }
-
-                    // Animate the scroll of the 'html' and 'body' elements
-                    $('.mensagens').animate({
-                        // Calculate the target position: the element's distance from the top of the document
-                        scrollTop: $('.mensagens')[0].scrollHeight
-                    }, 1); // 1ms is the duration of the animation (1 second)
-                }
-            }
-        });
-    });
-}*/
-
 const atualizarUsuariosOnline = (lista) => {
-    console.log("Usuários online");
-    console.log(lista);
     for(let i in lista){
-        console.log(`USUARIO ONLINE: ${lista[i].id}`);
+        //console.log(`USUARIO ONLINE: ${lista[i].id}`);
         $(`li[userid='${lista[i].id}'] a i`).toggleClass("user-online user-offline");
     }
-
 }
 
 const sinalizarUsuarioOnline = async () => {
@@ -94,7 +40,7 @@ const carregarUsuarios = () => {
 
                 let idUsuarioSelecionado = $(event.currentTarget).attr("userid");
                 
-                console.log(`PEGANDO MENSAGENS ENTRE ${idUsuarioLogado} E ${idUsuarioSelecionado}`);
+                //console.log(`PEGANDO MENSAGENS ENTRE ${idUsuarioLogado} E ${idUsuarioSelecionado}`);
 
                 $.ajax({
                     url: CONFIG.URL_API + "/getMensagensEntreUsuarios",
@@ -127,14 +73,6 @@ const carregarUsuarios = () => {
 $(() => {
     socket = io(CONFIG.URL_SERVIDOR_SOCKET);
 
-    /*socket.emit("teste", 'Bom', 'Demais');
-
-    socket.on("retorno_teste", (val1, val2, val3) => {
-        console.log(val1);
-        console.log(val2);
-        console.log(val3);
-    });*/
-
     carregarUsuarios();
     sinalizarUsuarioOnline();
     //socket.emit("user-offline", "lucas");
@@ -144,10 +82,6 @@ $(() => {
     });
 
     socket.on("receber-mensagem", (idUsuarioEnvia, mensagem) => {
-        //console.log(`ID Usuário: ${idUsuarioEnvia} - MENSAGEM: ${mensagem}`);
-
-        //let userAtivo = $("#ulContatos>.active");
-        
         let userAtivo = $(`.user-selected`);
         console.log(userAtivo);
 
@@ -162,10 +96,9 @@ $(() => {
             }, 1000); // 1000ms is the duration of the animation (1 second)
 
         }else{
-            //let spanAlertaMensagem = $(`#ulContatos>[userid=${idUsuarioEnvia}]>.span-alerta-mensagem`);
             let spanAlertaMensagem = $(`#sidebar-usuarios>li[userid='${idUsuarioEnvia}']>.span-alerta-mensagem`);
+            
             if(spanAlertaMensagem.length == 0 ){
-                //$(`#ulContatos>[userid=${idUsuarioEnvia}]`).append(`<span class="badge text-bg-warning span-alerta-mensagem">1</span>`);
                 $(`#sidebar-usuarios>li[userid='${idUsuarioEnvia}']`).prepend(`<span class="badge text-bg-warning span-alerta-mensagem">1</span>`);
             }else{
                 let totalMensagens = Number(spanAlertaMensagem.text());
@@ -176,13 +109,8 @@ $(() => {
     });
 
     $("#bEnviarMensagem").click(() => {
-        //let usuarioID = $("#ulContatos>.active").attr("userid");
         let usuarioID = $(`.user-selected`).attr("userid");
         let mensagem = $("#iMensagemEnviar").val();
-
-        /*console.log(usuarioID);
-        console.log(idUsuarioLogado);
-        console.log(mensagem);*/
 
         $.ajax({
             url: CONFIG.URL_API + "/mensagens",
@@ -207,5 +135,9 @@ $(() => {
                 socket.emit("enviar-mensagem", idUsuarioLogado, usuarioID, mensagem);
             }
         });
+    });
+
+    $("#bConfirmaLogout").click((event) => {
+        logout();
     });
 });

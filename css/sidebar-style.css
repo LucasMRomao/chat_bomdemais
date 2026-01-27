@@ -35,6 +35,8 @@ body {
 #sidebar{
     width: 70px;
     min-width: 70px;
+    height: 95%;
+    min-height: 95vh;
     z-index: 1000;
     transition: all .25s ease-in-out;
     display: flex;

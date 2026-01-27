@@ -18,3 +18,7 @@ async function pegarDadosUsuarioOnline(){
     const response = await window.api.pegarDadosUsuarioOnline();
     return response;
 }
+
+async function logout(){
+    const response = await window.api.logout()
+}

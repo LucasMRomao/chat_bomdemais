@@ -5,9 +5,12 @@ let userLogado = ''
 let idUserLogado = ''
 let nomeUserLogado = ''
 
+let janelaLogin;
+let janelaPrincipal;
+
 //Janela Inicial
 const createWindow = () => {
-  const win = new BrowserWindow({
+  janelaLogin = new BrowserWindow({
     width: 600,
     height: 600,
     icon: './img/icone.png',
@@ -16,11 +19,11 @@ const createWindow = () => {
     }
   })
 
-  win.loadFile('pages/login.html')
+  janelaLogin.loadFile('pages/login.html')
 }
 
 const abrirTelaPrincipal = () => {
-  const principal = new BrowserWindow({
+  janelaPrincipal = new BrowserWindow({
     width: 600,
     height: 600,
     icon: './img/icone.png',
@@ -31,7 +34,8 @@ const abrirTelaPrincipal = () => {
     }
   })
 
-  principal.loadFile('./pages/index.html')
+  janelaPrincipal.loadFile('./pages/index.html')
+  if(janelaLogin) janelaLogin.close()
 }
 
 const abrirTelaConfiguracoes = () => {
@@ -83,6 +87,14 @@ app.whenReady().then(() => {
     
     return user;
   })
+
+  ipcMain.on("logout", (event) => {
+    createWindow()
+    if(janelaPrincipal) janelaPrincipal.close();
+    userLogado = '';
+    idUserLogado = '';
+    nomeUserLogado = '';
+  });
 })
 
 app.on('window-all-closed', () => {
