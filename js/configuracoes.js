@@ -7,9 +7,6 @@ const esconderSenha = (senha) => {
 }
 
 const editarUsuario = (id, usuario, senha) => {
-    console.log(id);
-    console.log(usuario);
-    console.log(senha);
     $("#iEditarID").val(id);
     $("#iEditarUsuario").val(usuario);
     $("#iEditarSenha").val(senha);
@@ -97,11 +94,30 @@ $(() => {
             success: (result) => {
                 if(result){
                     $("#modal-mensagem").text("Usuário adicionado com sucesso!");
-                    $("#modal-adicionar-usuario").modal('hide');
                     $("#modal-exibir-mensagem").modal('show');
                     carregarUsuarios();
                 }
             }
         });
+    });
+
+    $("#bResetarSenha").click(() => {
+        if(confirm("Deseja realmente resetar a senha do usuário selecionado?")){
+            $.ajax({
+                url: CONFIG.URL_API + "/resetarSenhaUsuario",
+                method: "PUT",
+                data: {
+                    id_usuario: $("#iEditarID").val()
+                },
+                success: (result) => {
+                    if(result){
+                        $("#modal-mensagem").text("Senha do usuário resetada com sucesso!");
+                        $("#modal-exibir-mensagem").modal("show");
+                        $("#modal-editar-usuario").modal('hide');
+                        $("#iAdicionarSenha").val("12345");
+                    }
+                }
+            })
+        }
     });
 });

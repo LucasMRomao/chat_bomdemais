@@ -5,7 +5,7 @@ var idUsuarioLogado = "";
 const atualizarUsuariosOnline = (lista) => {
     for(let i in lista){
         //console.log(`USUARIO ONLINE: ${lista[i].id}`);
-        $(`li[userid='${lista[i].id}'] a i`).toggleClass("user-online user-offline");
+        $(`li[userid='${lista[i].id}'] a i`).toggleClass("user-online user-offline fa-comment-slash fa-comment");
     }
 }
 
@@ -24,7 +24,7 @@ const carregarUsuarios = () => {
         success: (result) => {
             console.log(result);
             for(let i in result){
-                let $user = `<li class="sidebar-item" userid='${result[i].id}' username='${result[i].usuario}'><!--<span class="badge text-bg-warning span-alerta-mensagem">1</span>--><a href="#" class="sidebar-link"><i class="fa-solid fa-comment-slash user-offline"></i><span class="user-name">${result[i].nome}</span></a></li>`;
+                let $user = `<li class="sidebar-item" userid='${result[i].id}' username='${result[i].usuario}'><a href="#" class="sidebar-link"><i class="fa-solid fa-comment-slash user-offline"></i><span class="user-name">${result[i].nome}</span></a></li>`;
                 $("#sidebar-usuarios").append($user);
             }
 

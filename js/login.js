@@ -87,6 +87,7 @@ $(() => {
             $("#modal-configuracoes").modal('hide');
             $("#modal-mensagem").text("Ambos os campos devem ser preenchidos!");
             $("#modal-exibir-mensagem").modal('show');
+            $("#modal-configuracoes").modal('hide');
         }else{
             autenticarConfiguracoes(usuario, senha);
         }
@@ -95,5 +96,17 @@ $(() => {
     $("#btn-credenciais-incorretas").click(() => {
         $("#modal-credenciais-incorretas").modal('hide');
         $("#modal-configuracoes").modal('show');
+    });
+
+    $("#iUsuarioConfiguracoes").keyup((event) => {
+        if(event.keyCode == 13){ //13 - Enter
+            $("#bLogarConfiguracoes").click();
+        }
+    })
+
+    $("#iSenhaConfiguracoes").keyup((event) => {
+        if(event.keyCode == 13){ //13 - Enter
+            $("#bLogarConfiguracoes").click();
+        }
     });
 });
