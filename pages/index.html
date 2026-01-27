@@ -5,39 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Bom Demais</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/sidebar-style.css">
     <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body background="../img/fundo.png" style="background-size: cover;">
     <div class="container">
         <div class="row">
             <div class="col-3 contatos">
-                <ul class="list-group" id="ulContatos">
+                <div class="wrapper">
+                    <aside id="sidebar">
+                        <div class="d-flex">
+                            <button type="button" id="toggle-btn">
+                                <i class="fa-solid fa-grip"></i>
+                                <!--<img src="../img/icones/icone-grid.png" style="width: 20px; height: auto;"/>-->
+                            </button>
+                            <div class="sidebar-logo">
+                                <a href="#">Contatos</a>
+                            </div>
+                        </div>
+                        <ul class="sidebar-nav" id="sidebar-usuarios">
+                            <li class="sidebar-item user-selected">
+                                <a href="#" class="sidebar-link">
+                                    <i class="fa-solid fa-comment user-online"></i>
+                                    <!--<img src="../img/icones/icone-usuario.png" style="width: 20px; height: auto;"/>-->
+                                    <span class="user-name">Profile</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link">
+                                    <i class="fa-solid fa-comment-slash user-offline"></i>
+                                    <!--<img src="../img/icones/icone-agenda.png" style="width: 20px; height: auto;"/>-->
+                                    <span class="user-name">Task</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="sidebar-footer">
+                            <a href="#" class="sidebar-link logout">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                <!--<img src="../img/icones/icone-logout.gif" style="width: 20px; height: auto;"/>-->
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </aside>
+                    <!--<div class="main p-3">
+                        <div class="text-center">
+                            <h1>
+                                Sidebar Bootstrap 5
+                            </h1>
+                        </div>
+                    </div>-->
+                </div>
+                <!--<ul class="list-group" id="ulContatos">
                     
-                </ul>
+                </ul>-->
             </div>
             <div class="col-9">
-                <div class="row mensagens d-block">
-                    <!--<div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
-                    <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>
-                    <div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
-                    <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>
-                    <div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
-                    <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>
-                    <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>-->
+                <div class="main">
+                    <div class="row mensagens d-block">
+                        <!--<div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
+                        <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>
+                        <div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
+                        <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>
+                        <div class="col-12 mensagem mensagemRecebida"><span class="badge text-bg-warning span-msg">Esta é uma mensagem automática.</span></div>
+                        <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>
+                        <div class="col-12 mensagem mensagemEnviada d-flex"><span class="badge text-bg-success ms-auto span-msg">Esta é uma mensagem automática.</span></div>-->
+                    </div>
                 </div>
                 <div class="row div-enviar-mensagem">
                     <div class="input-group mb-3">
                         <textarea class="form-control" id="iMensagemEnviar" rows="2" disabled></textarea>
-                        <button type="button" class="btn btn-outline-primary" id="bEnviarMensagem" disabled><img src="../img/icone-enviar-2.gif"/></button>
+                        <button type="button" class="btn btn-outline-primary" id="bEnviarMensagem" disabled><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://kit.fontawesome.com/18c4d1a139.js" crossorigin="anonymous"></script>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script src="../js/socket.io.min.js"></script>
     <script src="../js/config.js"></script>
     <script src="../renderer.js"></script>
+    <script src="../js/sidebar-toggle.js"></script>
     <script src="../js/index.js"></script>
 </body>
 </html>
