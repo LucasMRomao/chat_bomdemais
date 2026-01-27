@@ -32,3 +32,4 @@ Route.resource('mensagens', 'MensagemController').apiOnly()
 
 Route.get('/getUsuarioByCredentials', 'UsuarioController.getUsuarioByCredentials')
 Route.get('/getMensagensEntreUsuarios', 'MensagemController.getMensagensEntreUsuarios')
+Route.put('/resetarSenhaUsuario', 'UsuarioController.resetarSenhaUsuario')

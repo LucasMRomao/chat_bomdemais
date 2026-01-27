@@ -43,6 +43,10 @@ class User extends Model {
   static async getUsuarioByCredentials(data){
     return Database.raw(`(SELECT * FROM usuarios WHERE usuario = '${data.usuario}' AND SENHA = '${data.senha}')`)
   }
+
+  static async resetarSenhaUsuario(data){
+    return Database.raw(`UPDATE usuarios SET senha = '12345' WHERE id = '${data.id_usuario}'`)
+  }
 }
 
 module.exports = User

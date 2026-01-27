@@ -50,6 +50,13 @@ class UsuarioController {
         return Usuario.getUsuarioByCredentials(data)
     }
 
+    async resetarSenhaUsuario({ request }){
+        const data = request.only([
+            'id_usuario'
+        ])
+
+        return Usuario.resetarSenhaUsuario(data)
+    }
 }
 
 module.exports = UsuarioController
