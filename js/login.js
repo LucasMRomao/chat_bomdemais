@@ -9,10 +9,13 @@ function autenticarConfiguracoes(usuario, senha){
             senha: senha
         },
         success: (result) => {
+            $("#iUsuarioConfiguracoes").val("");
+            $("#iSenhaConfiguracoes").val("");
+            $("#modal-configuracoes").modal('hide');
+            
             if(result[0][0]){
                 abrirTelaConfiguracoes(usuario);
             }else{
-                $("#modal-configuracoes").modal('hide');
                 $("#modal-mensagem").text("Usuário e/ou senha incorreto(s).");
                 $("#modal-exibir-mensagem").modal('show');
             }
@@ -93,6 +96,11 @@ $(() => {
         }
     }); 
 
+    $("#bFecharConfiguracoes").click((event) => {
+        $("#iUsuarioConfiguracoes").val("");
+        $("#iSenhaConfiguracoes").val("");
+    });
+    
     $("#btn-credenciais-incorretas").click(() => {
         $("#modal-credenciais-incorretas").modal('hide');
         $("#modal-configuracoes").modal('show');

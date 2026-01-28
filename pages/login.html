@@ -29,17 +29,25 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="input-group mb-3">
+                        <!--<div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Usuário</span>
                             <input type="text" class="form-control" id="iUsuarioConfiguracoes" placeholder="Usuário" aria-label="Usuario" aria-describedby="basic-addon1">
+                        </div>-->
+                        <div class="form-floating mb-1">
+                            <input type="text" class="form-control" id="iUsuarioConfiguracoes" placeholder="Usuário" aria-label="Usuario" aria-describedby="basic-addon1">
+                            <label for="iUsuarioConfiguracoes">Usuário</label>
                         </div>
-                        <div class="input-group mb-3">
+                        <div class="form-floating mb-1">
+                            <input type="password" class="form-control" id="iSenhaConfiguracoes" placeholder="Usuário" aria-label="Usuario" aria-describedby="basic-addon1">
+                            <label for="iSenhaConfiguracoes">Senha</label>
+                        </div>
+                        <!--<div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Senha</span>
                             <input type="password" class="form-control" id="iSenhaConfiguracoes" placeholder="Usuário" aria-label="Usuario" aria-describedby="basic-addon1">
-                        </div>
+                        </div>-->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="bFecharConfiguracoes">Fechar</button>
                         <button type="button" class="btn btn-primary" id="bLogarConfiguracoes">Entrar</button>
                     </div>
                 </div>
@@ -48,9 +56,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 d-grid gap-2">
-                    <img src="../img/logo.png" style="width: 150; height: auto; margin: 0 auto;"/>
-                    <input type="text" id="iUsuario" class="form-control" placeholder="Usuário"/>
-                    <input type="password" id="iSenha" class="form-control" placeholder="Senha"/>
+                    <img src="../img/logo.png" style="width: 150px; height: auto; margin: 0 auto;"/>
+                    <div class="form-floating mb-1">
+                        <input type="text" id="iUsuario" class="form-control" placeholder="Usuário"/>
+                        <label for="iUsuario">Usuário</label>
+                    </div>
+                    <!--<input type="text" id="iUsuario" class="form-control" placeholder="Usuário"/>-->
+                    <div class="form-floating mb-1">
+                        <input type="password" id="iSenha" class="form-control" placeholder="Senha"/>
+                        <label for="iSenha">Senha</label>
+                    </div>
+                    <!--<input type="password" id="iSenha" class="form-control" placeholder="Senha"/>-->
                     <button class="btn btn-outline-success" id="bEntrar">Entrar</button>
                     <button class="btn btn-outline-danger" id="bFechar">Fechar</button>
                     <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modal-configuracoes"><img src="../img/icone-engrenagens.gif" /></button>
