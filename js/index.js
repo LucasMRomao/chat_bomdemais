@@ -140,4 +140,37 @@ $(() => {
     $("#bConfirmaLogout").click((event) => {
         logout();
     });
+
+    $("#bConfirmaAlterarSenha").click((event) => {
+        let novaSenha = $("#iAlterarSenha").val();
+        let confirmaNovaSenha = $("#iConfirmaAlterarSenha").val();
+
+        if(!novaSenha || !confirmaNovaSenha){
+            $("#sMensagem").text("Insira a nova senha em ambos os campos!");
+            $("#modal-mensagem").modal("show");
+        }else if(novaSenha != confirmaNovaSenha){
+            $("#sMensagem").text("As senhas devem ser iguais!");
+            $("#modal-mensagem").modal("show");
+        }else{
+            $.ajax({
+                url: `${CONFIG.URL_API}/usuarios/${idUsuarioLogado}` ,
+                method: "PUT",
+                data: {
+                    senha: novaSenha
+                },
+                success: (result) => {
+                    $("#modal-alterar-senha").modal("hide");
+                    $("#iAlterarSenha").val("");
+                    $("#iConfirmaAlterarSenha").val("");
+                    if(result){
+                        $("#sMensagem").text("Senha alterada com sucesso!");
+                        $("#modal-mensagem").modal("show");
+                    }else{
+                        $("#sMensagem").text("Erro ao alterar senha. Tente novamente!");
+                        $("#modal-mensagem").modal("show");
+                    }
+                }
+            });
+        }
+    });
 });
